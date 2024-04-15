@@ -1,0 +1,12 @@
+Flask
+Flask-WTF
+Flask-Cors
+Flask-Login
+Flask-Bcrypt
+Flask-Limiter
+Flask-Caching
+Flask-SQLAlchemy
+black
+pydantic
+gunicorn
+python-dotenv
