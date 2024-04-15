@@ -42,12 +42,12 @@ def detectFace():
         identity = obj[key]
         facial_area = identity["facial_area"]
 
-        cropped_face = imRGB[facial_area[1]                             :facial_area[3], facial_area[0]:facial_area[2]]
+        cropped_face = imRGB[facial_area[1]:facial_area[3], facial_area[0]:facial_area[2]]
         cropped_face_rgb = cv2.cvtColor(cropped_face, cv2.COLOR_BGR2RGB)
         # Lưu khuôn mặt đã cắt
         cv2.imwrite(os.path.join(output_folder, "cropped_face_" +
                     str(key) + ".jpg"), cropped_face_rgb)
-
+    os.remove(file_path)
     return "hehe"
 
 
