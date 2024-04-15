@@ -10,12 +10,12 @@ black
 pydantic
 gunicorn
 python-dotenv
-deepface
-doctr
-python-doctr
-tensorflow==2.15
-# keras
-opencv-python
-retina-face
-tf-keras
-tf2onnx
+deepface==0.0.89
+doctr==1.9.0
+python-doctr==0.8.1
+tensorflow==2.14.0
+keras==2.14.0
+opencv-python==4.8.1.78
+retina-face==0.0.16
+tf-keras==2.14.0
+tf2onnx==1.16.1
