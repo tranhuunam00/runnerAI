@@ -32,15 +32,19 @@ def detectFace(request):
     imRGB = cv2.cvtColor(imBRG, cv2.COLOR_BGR2RGB)
 
     obj = RetinaFace.detect_faces(file_path)
+    
     for key in obj.keys():
         identity = obj[key]
         facial_area = identity["facial_area"]
 
         cropped_face = imRGB[facial_area[1]                             :facial_area[3], facial_area[0]:facial_area[2]]
+
         cropped_face_rgb = cv2.cvtColor(cropped_face, cv2.COLOR_BGR2RGB)
+
         # Lưu khuôn mặt đã cắt
-        cv2.imwrite(os.path.join(output_folder, "cropped_face_" +
-                    str(key) + ".jpg"), cropped_face_rgb)
+        cv2.imwrite(os.path.join(output_folder, str(key) + "__" +
+                                 file.filename), cropped_face_rgb)
+        print("done")
     t = Thread(target=remove_file, args=(file_path,))
     t.start()
     return {
