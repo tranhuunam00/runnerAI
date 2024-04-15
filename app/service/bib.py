@@ -5,5 +5,7 @@ model = ocr_predictor(pretrained=True)
 
 def detectTextFromImage(request):
   single_img_doc = DocumentFile.from_images("./input/detectFace/chay.jpg")
+  print("quaaaaaaa---------")
   result = model(single_img_doc)
-  return result
+  print(result)
+  return "heheh"

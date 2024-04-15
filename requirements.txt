@@ -13,8 +13,9 @@ python-dotenv
 deepface
 doctr
 python-doctr
-# tensorflow
+tensorflow==2.15
 # keras
 opencv-python
 retina-face
 tf-keras
+tf2onnx
