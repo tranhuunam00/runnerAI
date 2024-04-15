@@ -12,4 +12,5 @@ face_bp = Blueprint("face", __name__, url_prefix="/face")
 @face_bp.route("/", methods=["GET", "POST"])
 @limiter.limit("30/minute")
 def handle_face_request():
+    request.timeout = 120
     return detectFace(request)

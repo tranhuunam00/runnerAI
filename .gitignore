@@ -158,3 +158,7 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+vgg_face_weights.h5
+retinaface.h5
+db_resnet50-84171458.zip
+crnn_vgg16_bn-76b7f2c6.zip

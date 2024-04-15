@@ -10,3 +10,11 @@ black
 pydantic
 gunicorn
 python-dotenv
+deepface
+doctr
+python-doctr
+# tensorflow
+# keras
+opencv-python
+retina-face
+tf-keras
