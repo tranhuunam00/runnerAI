@@ -2,6 +2,7 @@ from retinaface import RetinaFace
 from flask import Flask, request
 import os
 import cv2
+from threading import Thread
 
 
 app = Flask(__name__)
@@ -19,6 +20,9 @@ if not os.path.exists(output_folder):
 def hello_world():
     return 'Hello World'
 
+
+def remove_file(file_path):
+    os.remove(file_path)
 
 @app.route('/', methods=['POST'])
 def detectFace():
@@ -47,7 +51,8 @@ def detectFace():
         # Lưu khuôn mặt đã cắt
         cv2.imwrite(os.path.join(output_folder, "cropped_face_" +
                     str(key) + ".jpg"), cropped_face_rgb)
-    os.remove(file_path)
+    t = Thread(target=remove_file, args=(file_path,))
+    t.start()
     return "hehe"
 
 
