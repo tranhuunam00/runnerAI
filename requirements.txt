@@ -17,5 +17,5 @@ tensorflow==2.14.0
 keras==2.14.0
 opencv-python==4.8.1.78
 retina-face==0.0.16
-tf-keras==2.14.0
+# tf-keras==2.14.0
 tf2onnx==1.16.1

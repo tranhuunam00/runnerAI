@@ -65,8 +65,10 @@ def findFace(request):
     file_path = os.path.join(UPLOAD_FOLDER, file.filename)
     file.save(file_path)
 
-    images = DeepFace.find(img_path=file_path, db_path=output_folder)
+    images = DeepFace.find(img_path=file_path, db_path=output_folder, enforce_detection = False)
 
+    if(len(images) == 1): 
+        return []
     res = []
     for image in images:
 
