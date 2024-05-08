@@ -13,6 +13,7 @@ output_folder = "cropped_faces"
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
+sample_folder = "sample_folder"
 
 def remove_file(file_path):
     os.remove(file_path)
@@ -64,14 +65,19 @@ def findFace(request):
 
     file_path = os.path.join(UPLOAD_FOLDER, file.filename)
     file.save(file_path)
+    form = request.form
+    eventId = form.get('eventId')
 
-    images = DeepFace.find(img_path=file_path, db_path=output_folder, enforce_detection = False)
+    folder = sample_folder + eventId
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+        
+    images = DeepFace.find(img_path=file_path, db_path=folder, enforce_detection = False)
 
     if(len(images) == 1): 
         return []
     res = []
     for image in images:
-
         if (float(image["distance"]) < 0.15):
             print("---")
             res.append(image.values[0][0])
