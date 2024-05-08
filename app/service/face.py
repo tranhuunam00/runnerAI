@@ -15,6 +15,7 @@ if not os.path.exists(output_folder):
 
 sample_folder = "sample_folder"
 
+
 def remove_file(file_path):
     os.remove(file_path)
 
@@ -39,8 +40,7 @@ def detectFace(request):
         identity = obj[key]
         facial_area = identity["facial_area"]
 
-        cropped_face = imRGB[facial_area[1]
-            :facial_area[3], facial_area[0]:facial_area[2]]
+        cropped_face = imRGB[facial_area[1]                             :facial_area[3], facial_area[0]:facial_area[2]]
 
         cropped_face_rgb = cv2.cvtColor(cropped_face, cv2.COLOR_BGR2RGB)
 
@@ -71,17 +71,29 @@ def findFace(request):
     folder = sample_folder + eventId
     if not os.path.exists(folder):
         os.makedirs(folder)
-        
-    images = DeepFace.find(img_path=file_path, db_path=folder, enforce_detection = False)
 
-    if(len(images) == 1): 
-        return []
-    res = []
-    for image in images:
-        if (float(image["distance"]) < 0.15):
-            print("---")
-            res.append(image.values[0][0])
+    images = DeepFace.find(
+        img_path=file_path, db_path=folder, enforce_detection=False)
 
     t = Thread(target=remove_file, args=(file_path,))
     t.start()
-    return res
+
+    res = []
+    images = images[0].head().to_numpy()
+    
+    if (len(images) == 0):
+        return []
+    
+    for index in range(0, len(images)):
+        print(index)
+        print("----------------------")
+        print(images[index])
+       
+        
+        if (float(images[index][11]) < 0.7):
+            res.append(images[index][0])
+
+    print(res)
+    return {
+        "data": res
+    }
