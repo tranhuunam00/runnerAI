@@ -13,8 +13,8 @@ python-dotenv
 deepface==0.0.89
 doctr==1.9.0
 python-doctr==0.8.1
-tensorflow==2.14.0
-keras==2.14.0
+# tensorflow==2.14.0
+# keras==2.14.0
 opencv-python==4.8.1.78
 retina-face==0.0.16
 # tf-keras==2.14.0
