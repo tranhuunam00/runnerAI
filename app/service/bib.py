@@ -63,4 +63,5 @@ def detectTextFromImage(request):
         return words
 
     except Exception as e:
+        print(e)
         return "error"
