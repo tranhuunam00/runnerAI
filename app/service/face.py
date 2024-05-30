@@ -99,3 +99,31 @@ def findFace(request):
         }
     except Exception as e:
         return {'data': []}
+
+
+def findFace2(file_path, eventId):
+    try:
+        folder = sample_folder + eventId
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+
+        images = DeepFace.find(
+            img_path=file_path, db_path=folder, enforce_detection=False)
+
+        res = []
+        images = images[0].head().to_numpy()
+
+        if (len(images) == 0):
+            return []
+
+        for index in range(0, len(images)):
+
+            if (float(images[index][11]) < 0.1):
+                res.append(images[index][0])
+
+        print(res)
+        return {
+            "data": res
+        }
+    except Exception as e:
+        return {'data': []}

@@ -6,6 +6,7 @@ import cv2
 from retinaface import RetinaFace
 
 from app.service.face import remove_file
+from app.service.face import findFace2
 
 model = ocr_predictor(pretrained=True)
 UPLOAD_FOLDER = 'uploads'
@@ -49,14 +50,17 @@ def detectTextFromImage(request):
                         if (word.confidence > 0.7):
                             words.append(word.value)
 
-    
         # nếu đủ điều kiện là ảnh mẫu thì không xóa
-        if (len(words) != 0):
-            if (len(obj.keys()) == 1):
+
+        if (len(obj.keys()) == 1):
+            sss = findFace2(file_path=file_path, eventId=eventId)
+            if (len(sss["data"]) == 1):
+                print("đây là ảnh mẫu")
                 return words
 
         t = Thread(target=remove_file, args=(file_path,))
         t.start()
         return words
+
     except Exception as e:
         return []
