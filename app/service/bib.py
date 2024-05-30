@@ -57,11 +57,13 @@ def detectTextFromImage(request):
             if (len(sss["data"]) == 1):
                 print("đây là ảnh mẫu")
                 return words
+            
 
         t = Thread(target=remove_file, args=(file_path,))
         t.start()
+        
         return words
 
     except Exception as e:
-        print("detectTextFromImage", e.__str__)
+        print("detectTextFromImage")
         return "error"
