@@ -90,7 +90,7 @@ def findFace(request):
             print("----------------------")
             print(images[index])
 
-            if (float(images[index][11]) < 0.25):
+            if (float(images[index][11]) < 0.15):
                 res.append(images[index][0])
 
         print(res)
