@@ -118,7 +118,7 @@ def findFace2(file_path, eventId):
 
         for index in range(0, len(images)):
 
-            if (float(images[index][11]) < 0.03):
+            if (float(images[index][11]) < 0.01):
                 res.append(images[index][0])
 
         print(res)
