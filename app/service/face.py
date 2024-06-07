@@ -56,41 +56,42 @@ def detectFace(request):
 
 
 def findFace(request):
+    if 'file' not in request.files:
+        return 'Không tìm thấy file'
+
+    file = request.files['file']
+    form = request.form
+    eventId = form.get('eventId')
+    filename = form.get('fileName')
+    file_path = os.path.join(UPLOAD_FOLDER, filename)
+    file.save(file_path)
+    
     try:
-        if 'file' not in request.files:
-            return 'Không tìm thấy file'
-
-        file = request.files['file']
-        if file.filename == '':
-            return 'Không tìm thấy tên file'
-
-        file_path = os.path.join(UPLOAD_FOLDER, file.filename)
-        file.save(file_path)
-        form = request.form
-        eventId = form.get('eventId')
-
         folder = sample_folder + eventId
         if not os.path.exists(folder):
             os.makedirs(folder)
+        print("------------0--------")
 
         images = DeepFace.find(
             img_path=file_path, db_path=folder, enforce_detection=False)
 
+        print("------------1--------")
         t = Thread(target=remove_file, args=(file_path,))
         t.start()
 
-        res = []
+        res = []    
         images = images[0].head().to_numpy()
 
         if (len(images) == 0):
             return []
+        print("------------2--------")
 
         for index in range(0, len(images)):
             print(index)
             print("----------------------")
             print(images[index])
 
-            if (float(images[index][11]) < 0.02):
+            if (float(images[index][11]) < 0.01):
                 res.append(images[index][0])
 
         print(res)
@@ -98,7 +99,10 @@ def findFace(request):
             "data": res
         }
     except Exception as e:
+        print("error", file_path)
         t = Thread(target=remove_file, args=(file_path,))
+        t.start()
+        
         return {'data': []}
 
 
