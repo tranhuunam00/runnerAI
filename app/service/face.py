@@ -98,6 +98,7 @@ def findFace(request):
             "data": res
         }
     except Exception as e:
+        t = Thread(target=remove_file, args=(file_path,))
         return {'data': []}
 
 
