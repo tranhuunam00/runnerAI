@@ -9,7 +9,7 @@ from app.service.face import detectFace, findFace
 face_bp = Blueprint("face", __name__, url_prefix="/face")
 
 
-@face_bp.route("/", methods=["GET", "POST"])
+@face_bp.route("/detect", methods=["GET", "POST"])
 @limiter.limit("30/minute")
 def handle_face_request():
     request.timeout = 120
