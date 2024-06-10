@@ -10,6 +10,6 @@ bib_bp = Blueprint("bib", __name__, url_prefix="/bib")
 
 
 @bib_bp.route("/", methods=["GET", "POST"])
-@limiter.limit("30/minute")
+@limiter.limit("8/minute")
 def detectTextFImage():
   return detectTextFromImage(request)
